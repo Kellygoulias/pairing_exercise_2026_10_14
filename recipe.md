@@ -6,7 +6,7 @@ Copy this into a `recipe.md` in your project and fill it out.
 
 As a user
 So I don't forget the details
-I want to keep a record of friends' names and birthdates
+I want to keep a record of friends' names and birthdates #add
 
 As a user
 So I can make edits when I've got dates wrong
@@ -32,31 +32,62 @@ _Include the initializer, public properties, and public methods with all paramet
 ```python
 # EXAMPLE
 
-class Reminder:
+class Friends_details:
     # User-facing properties:
     #   name: string
 
     def __init__(self, name):
         # Parameters:
-        #   name: string
+        # None
         # Side effects:
-        #   Sets the name property of the self object
-        pass # No code here yet
+        #   set lists of friends to empty list
+        self._list_of_friends = []
 
-    def remind_me_to(self, task):
+    def add(self, name, birthday):
+        params:
+        name : string
+        birthday: string
+        returns: None
+        side effects: appends entry to the list of friends
+
+    def edit_date(self, name, new_birthday):
         # Parameters:
-        #   task: string representing a single task
+        #   name: string 
+        #   new_birthday : string
         # Returns:
         #   Nothing
         # Side-effects
-        #   Saves the task to the self object
+        #   updates the birthday to new_birthday
         pass # No code here yet
 
-    def remind(self):
+    def edit_name(self, old_name, new_name):
+        # Parameters:
+        #   old_name: string 
+        #   new_name : string
         # Returns:
-        #   A string reminding the user to do the task
+        #   Nothing
+        # Side-effects
+        #   updates the old_name to new_name
+        pass # No code here yet
+
+    def birthdays_coming_soon(self, notice_period):
+        # Parameters:
+        #   notice_period: string 
+        # Returns:
+        #   returns string with relevant names.
+        # Side-effects
+        #   None
+        pass # No code here yet
+
+
+    def calculate_upcoming_age(self, name):
+        #Parameters: 
+        #
+        # name: A string
+        # Returns:
+        #  upcoming age: int
         # Side-effects:
-        #   Throws an exception if no task is set
+        #   None
         pass # No code here yet
 ```
 
@@ -68,28 +99,94 @@ _Make a list of examples of how the class will behave in different situations._
 # EXAMPLE
 
 """
-Given a name and a task
-#remind reminds the user to do the task
+Given an instance, an empty list is instantiated
 """
-reminder = Reminder("Kay")
-reminder.remind_me_to("Walk the dog")
-reminder.remind() # => "Walk the dog, Kay!"
+friend_list = Friends_details()
+self._list_of_friends # => []
 
 """
-Given a name and no task
-#remind raises an exception
+Given a name and a birthday, calling the add() method will append it to the friend_list
 """
-reminder = Reminder("Kay")
-reminder.remind() # raises an error with the message "No task set."
+
+friend_list = Friends_details()
+friend_list.add("Katie", "2025-10-17")
+self._list_of_friends # => [Object: "Katie", "2025-10-17"]
+
 
 """
-Given a name and an empty task
-#remind still reminds the user to do the task, even though it looks odd
+Given multiple names and a birthdays, calling the add() method will append them to the friend_list
 """
-reminder = Reminder("Kay")
-reminder.remind_me_to("")
-reminder.remind() # => ", Kay!"
-```
+
+friend_list = Friends_details()
+friend_list.add("Katie", "2025-10-17")
+friend_list.add("Spencer", "2025-07-28")
+self._list_of_friends # => [Object: "Katie", "2025-10-17" Object: "Spencer", "2025-07-28"]
+
+"""
+Given no name or birthday, when calling the add() method and exception is raised
+"""
+friend_list = Friends_details()
+friend_list.add("", "") #=> throws exception "Name and birthday must be provided"
+
+"""
+Given the incorrect type with the add() method, and exception is raised.
+"""
+friend_list = Friends_details()
+friend_list.add("Katie", 2) #=> throw TypeError => "The Birthday type must be a string"
+
+"""
+Given name is passed in and a new_date it updates the date
+"""
+
+friend_list = Friends_details()
+friend_list.add("Katie", "2025-10-17")
+friend_list.add("Spencer", "2025-07-28")
+friend_list.edit_date("Spencer", "2025-06-27")
+self._list_of_friends # => [Object: "Katie", "2025-10-17" Object: "Spencer", "2025-06-27"]
+
+"""
+Given no name provided or birthday and exception is raised when calling edit_date()
+"""
+friend_list = Friends_details()
+friend_list.add("Katie", "2025-10-17")
+friend_list.add("Spencer", "2025-07-28")
+friend_list.edit_date("Spencer", "") # => raises exception "Name and birthday must be provided"
+
+"""
+Given the incorrect type with the edit_date() method, and exception is raised.
+"""
+friend_list = Friends_details()
+friend_list.add("Spencer", "2025-07-28")
+friend_list.edit_date("Spencer", 7) #=> throw TypeError => "The entries data type must be a string"
+
+
+"""
+Given name is passed in and a new_name it updates the name
+"""
+friend_list = Friends_details()
+friend_list.add("Katie", "2025-10-17")
+friend_list.add("Spencer", "2025-07-28")
+friend_list.edit_name("Spencer", "Spensor")
+self._list_of_friends # => [Object: "Katie", "2025-10-17" Object: "Spensor", "2025-06-27"]
+
+
+"""
+Given some entries and notice period and a birthdays_coming_up_soon called it returns formatted string including names that are remaining to happen during the year
+"""
+friend_list = Friends_details()
+friend_list.add("Katie", "2025-10-17")
+friend_list.add("Spencer", "2025-07-28")
+friend_list.add("Sam", "2024-05-01")
+friend_list.birthdays_coming_up_soon("2026-06-30") #=> "Birthdays yet to be had thid year: Katie Spencer"
+
+"""
+Given a name, the function returns the age that is upcoming for the person.
+"""
+friend_list = Friends_details()
+friend_list.add("Katie", "2025-10-17")
+friend_list.add("Spencer", "2025-07-28")
+friend_list.calculate_upcoming_age("Katie") #=> 2
+
 
 _Encode each example as a test. You can add to the above list as you go._
 
