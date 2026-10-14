@@ -177,7 +177,7 @@ friend_list = Friends_details()
 friend_list.add("Katie", "2025-10-17")
 friend_list.add("Spencer", "2025-07-28")
 friend_list.add("Sam", "2024-05-01")
-friend_list.birthdays_coming_up_soon("2026-06-30") #=> "Birthdays yet to be had thid year: Katie Spencer"
+friend_list.birthdays_coming_up_soon("2026-06-30") #=> "Birthdays yet to be had this year: Katie Spencer"
 
 """
 Given a name, the function returns the age that is upcoming for the person.
